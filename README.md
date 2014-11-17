@@ -10,7 +10,7 @@ Artistic-Mosaic
 1、宣传网站<br />
 2、人脸识别程序<br />
 3、照片合成程序<br />
-4、程序演示网站<br />
+4、演示网站<br />
 <p>我们的团队包含4位成员，分别是：</p>
 Lead&QA:<a href="https://github.com/humeng" title="humeng">@humeng</a><br />
 Coder:<a href="https://github.com/zhangyanglogin" title="zhangyang">@zhangyang</a>(<a href="http://www.zhangy.cn" title="www.zhangy.cn" target="_blank">www.zhangy.cn</a>)<br />
