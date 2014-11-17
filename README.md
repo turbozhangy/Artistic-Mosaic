@@ -4,8 +4,8 @@ Artistic-Mosaic
 <p>于是乎这个项目就诞生了。</p>
 <p>我们的项目代号为<b>Artistic Mosaic</b>,意为文艺的马赛克。旨在通过软件将多张小图制作成一张具有代表意义的大图，例如：</p>
 <img src="https://raw.githubusercontent.com/zhangyanglogin/Artistic-Mosaic/master/Image/demo2.jpg" alt="示例图片2" width="500px">
-<img src="https://raw.githubusercontent.com/zhangyanglogin/Artistic-Mosaic/master/Image/demo1.jpg" alt="示例图片1">
 <img src="https://raw.githubusercontent.com/zhangyanglogin/Artistic-Mosaic/master/Image/demo3.jpg" alt="示例图片3" width="500px">
+<img src="https://raw.githubusercontent.com/zhangyanglogin/Artistic-Mosaic/master/Image/demo1.jpg" alt="示例图片1">
 <p>整个项目分为4个小项目：</p>
 1、宣传网站<br />
 2、人脸识别程序<br />
