@@ -5,5 +5,5 @@ Artistic-Mosaic
 ===============
 操作系统：Windows平台<br/>
 运行环境：Microsoft .NET Framework 4.5<br/>
-开发语言：Asp.Net Mvc 4、C Sharp<br/><br/>
+开发语言：Asp.Net Mvc 4、C Sharp<br/>
 数据库:MongoDB<br/>
