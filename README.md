@@ -13,7 +13,7 @@ Artistic-Mosaic
 4、程序演示网站<br />
 <p>我们的团队包含4位成员，分别是：</p>
 Lead&QA:<a href="https://github.com/humeng" title="humeng">@humeng</a><br />
-Coder:<a href="https://github.com/zhangyanglogin" title="zhangyang">@zhangyang</a>(<a href="http://www.zhangy.cn" title="www.zhangy.cn">www.zhangy.cn</a>)<br />
+Coder:<a href="https://github.com/zhangyanglogin" title="zhangyang">@zhangyang</a>(<a href="http://www.zhangy.cn" title="www.zhangy.cn" target="_blank">www.zhangy.cn</a>)<br />
 Coder:<a href="https://github.com/zhangyanglogin" title="wangpeng">@wangpeng</a><br />
 Coder:<a href="https://github.com/zhangyanglogin" title="lilu">@lilu</a><br />
 
