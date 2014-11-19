@@ -14,7 +14,7 @@ Artistic-Mosaic
 <p>我们的团队包含4位成员，分别是：</p>
 Lead&QA:<a href="https://github.com/humeng" title="humeng">@humeng</a><br />
 Coder:<a href="https://github.com/zhangyanglogin" title="zhangyang">@zhangyang</a>(<a href="http://www.zhangy.cn" title="www.zhangy.cn" target="_blank">www.zhangy.cn</a>)<br />
-Coder:<a href="https://github.com/zhangyanglogin" title="wangpeng">@wangpeng</a>(Idea提供者)<br />
+Coder:<a href="https://github.com/wpp5354" title="wangpeng">@wangpeng</a>(Idea提供者)<br />
 Coder:<a href="https://github.com/zhangyanglogin" title="lilu">@lilu</a><br />
 
 <p>项目演示地址：<a href="http://am.zhangy.cn" target="_blank">http://am.zhangy.cn</a></p>
