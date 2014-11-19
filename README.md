@@ -1,4 +1,4 @@
-Artistic-Mosaic
+﻿Artistic-Mosaic
 ===============
 <p>最近公司在搞一个代码竞赛，冠军可活动1000元人民币。参赛者自由组队，在农历2015年春节前完成自己的Idea就算完成比赛。</p>
 <p>于是乎这个项目就诞生了。</p>
@@ -15,7 +15,7 @@ Artistic-Mosaic
 Lead&QA:<a href="https://github.com/humeng" title="humeng">@humeng</a><br />
 Coder:<a href="https://github.com/zhangyanglogin" title="zhangyang">@zhangyang</a>(<a href="http://www.zhangy.cn" title="www.zhangy.cn" target="_blank">www.zhangy.cn</a>)<br />
 Coder:<a href="https://github.com/wpp5354" title="wangpeng">@wangpeng</a>(Idea提供者)<br />
-Coder:<a href="https://github.com/zhangyanglogin" title="lilu">@lilu</a><br />
+Coder:<a href="https://github.com/Fawn615" title="lilu">@lilu</a><br />
 
 <p>项目演示地址：<a href="http://am.zhangy.cn" target="_blank">http://am.zhangy.cn</a></p>
 <p>更多内容，敬请关注。</p>
