@@ -22,7 +22,6 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	 overflow-y:hidden;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -156,7 +155,7 @@ header {
 /*整屏样式*/
 /*第一屏*/
 .home {
-	/*background:hsl(184,65%,49%);*/
+	background:#E88913;
 	color:hsl(184,65%,49%);
 	font-weight:bold;
 	text-align:center;
@@ -176,26 +175,20 @@ header {
 }
 /*第二屏*/
 .overview {
-	background:hsl(350,92%,59%);
+	background:#CA3D67;
 }
-.overview .content
-{
-	margin-top:50px;
-	font-family:微软雅黑;
-	font-size:20px;
-	line-height:200%;
-}
+
 /*第三屏*/
 .configuration {
-	background:hsl(158,58%,52%);
+	background:#3C9DC8;
 }
 /*第四屏*/
 .options {
-	background:hsl(28,100%,52%);
+	background:#773F88;
 }
 /*第五屏*/
 .methods {
-	background:hsl(200,60%,55%);
+	background:#8AB424;
 }
 /*整屏样式*/
 .inner {
@@ -233,4 +226,14 @@ pre {
 		margin-left:30px;
 		margin-right:30px;
 	}
+}
+
+#jiantou
+{
+	position:fixed;
+	display:block;
+	margin-top:100px;
+	height:32px;
+	width:32px;
+	cursor:pointer;
 }
