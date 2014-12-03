@@ -1,0 +1,18 @@
+﻿#warp {
+    width:1680px;
+    height: 1050px;
+}
+
+.pic-block {
+    width: 50px;
+    height: 50px;
+    float: left;
+    background-image: url('Image/1680_1050_5405.jpg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.active.pic-block {
+    background-image: url('Image/1680_1050_5409.jpg');
+}
+

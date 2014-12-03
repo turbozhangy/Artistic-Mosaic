@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+    <link href="~/Content/page.css" rel="stylesheet" />
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .warp {
+            position: relative;
+            width: 1280px;
+            height: 1024px;
+        }
+
+        .inbox, .outbox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+            height: 1024px;
+            overflow: hidden;
+        }
+
+        .inbox {
+            z-index: 100;
+        }
+
+            .inbox img {
+                width: 20px;
+                height: 20px;
+            }
+
+        .outbox {
+            z-index: 110;
+            opacity: .75;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var html = new Array();
+            for (var j = 1; j < 100; j++) {
+                for (var i = 1; i < 102; i++) {
+                    html.push("<img src=\"/Images/1%20(" + i + ").jpg\" />");
+                }
+            }
+            $("#inbox").html(html.join(""));
+        });
+
+    </script>
+</head>
+<body>
+    <div class="warp">
+        <div class="inbox" id="inbox">
+
+
+        </div>
+        <div class="outbox">
+            <img src="/Content/Image/1.jpg" />
+        </div>
+    </div>
+</body>
+</html>
