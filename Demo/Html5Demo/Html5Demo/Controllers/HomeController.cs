@@ -22,11 +22,9 @@ namespace Html5Demo.Controllers
     {
         //
         // GET: /Home/
-
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }

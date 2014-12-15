@@ -5,59 +5,59 @@
   </assembly>
   <members>
     <member name="T:System.Net.Http.RtcRequestFactory">
-      <summary>使用实时通信 (RTC) 背景通知基础结构表示用于创建特殊 <see cref="T:System.Net.Http.HttpRequestMessage" /> 以使用的类。</summary>
+      <summary>Represents the class that is used to create special <see cref="T:System.Net.Http.HttpRequestMessage" /> for use with the Real-Time-Communications (RTC) background notification infrastructure.</summary>
     </member>
     <member name="M:System.Net.Http.RtcRequestFactory.Create(System.Net.Http.HttpMethod,System.Uri)">
-      <summary>创建特殊 <see cref="T:System.Net.Http.HttpRequestMessage" /> 以用于实时通信 (RTC) 后台通知基础结构。</summary>
-      <returns>返回 <see cref="T:System.Net.Http.HttpRequestMessage" />。 一次与 RTC 背景通知基础结构一起使用的 HTTP 请求消息。</returns>
-      <param name="method">HTTP 方法。</param>
-      <param name="uri">请求发送到的 URI。</param>
+      <summary>Creates a special <see cref="T:System.Net.Http.HttpRequestMessage" /> for use with the Real-Time-Communications (RTC) background notification infrastructure.</summary>
+      <returns>Returns <see cref="T:System.Net.Http.HttpRequestMessage" />.An HTTP request message for use with the RTC background notification infrastructure.</returns>
+      <param name="method">The HTTP method.</param>
+      <param name="uri">The Uri the request is sent to.</param>
     </member>
     <member name="T:System.Net.Http.WebRequestHandler">
-      <summary>提供不可用于 Windows Store 应用程序或其他环境的特定以桌面的功能。</summary>
+      <summary>Provides desktop-specific features not available to Windows Store apps or other environments. </summary>
     </member>
     <member name="M:System.Net.Http.WebRequestHandler.#ctor">
-      <summary>初始化 <see cref="T:System.Net.Http.WebRequestHandler" /> 类的新实例。</summary>
+      <summary>Initializes a new instance of the <see cref="T:System.Net.Http.WebRequestHandler" /> class.</summary>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.AllowPipelining">
-      <summary>获取或设置一个值，该值指示是否通过管线将请求传输到 Internet 资源。</summary>
-      <returns>返回 <see cref="T:System.Boolean" />。 如果通过管线传输请求，则为 true，否则为 false。 默认值为 true。</returns>
+      <summary> Gets or sets a value that indicates whether to pipeline the request to the Internet resource.</summary>
+      <returns>Returns <see cref="T:System.Boolean" />.true if the request should be pipelined; otherwise, false. The default is true. </returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.AuthenticationLevel">
-      <summary>获取或设置指示用于此请求的身份验证和模拟的级别的值。</summary>
-      <returns>返回 <see cref="T:System.Net.Security.AuthenticationLevel" />。 <see cref="T:System.Net.Security.AuthenticationLevel" /> 值的按位组合。 默认值为 <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />。</returns>
+      <summary>Gets or sets a value indicating the level of authentication and impersonation used for this request.</summary>
+      <returns>Returns <see cref="T:System.Net.Security.AuthenticationLevel" />.A bitwise combination of the <see cref="T:System.Net.Security.AuthenticationLevel" /> values.  The default value is <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.CachePolicy">
-      <summary>获取或设置此请求的缓存策略。</summary>
-      <returns>返回 <see cref="T:System.Net.Cache.RequestCachePolicy" />。 定义缓存策略的 <see cref="T:System.Net.Cache.RequestCachePolicy" /> 对象。 默认值为 <see cref="P:System.Net.WebRequest.DefaultCachePolicy" />。</returns>
+      <summary>Gets or sets the cache policy for this request.</summary>
+      <returns>Returns <see cref="T:System.Net.Cache.RequestCachePolicy" />.A <see cref="T:System.Net.Cache.RequestCachePolicy" /> object that defines a cache policy. The default is <see cref="P:System.Net.WebRequest.DefaultCachePolicy" />.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.ClientCertificates">
-      <summary>获取或设置与此请求关联的安全证书集合。</summary>
-      <returns>返回 <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />。 与此请求关联的安全证书的集合。</returns>
+      <summary>Gets or sets the collection of security certificates that are associated with this request.</summary>
+      <returns>Returns <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />.The collection of security certificates associated with this request.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.ContinueTimeout">
-      <summary>获取或设置应用程序在上载数据前等待来自服务器的 100 连续的时间量（毫秒）。</summary>
-      <returns>返回 <see cref="T:System.TimeSpan" />。 该应用程序将在上载数据之前等待服务器“100-continue”的时间（以毫秒为单位） 默认值为 350 毫秒。</returns>
+      <summary>Gets or sets the amount of time, in milliseconds, the application will wait for 100-continue from the server before uploading data.</summary>
+      <returns>Returns <see cref="T:System.TimeSpan" />.The amount of time, in milliseconds, the application will wait for 100-continue from the server before uploading data. The default value is 350 milliseconds.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.ImpersonationLevel">
-      <summary>获取或设置当前请求的模拟级别。</summary>
-      <returns>返回 <see cref="T:System.Security.Principal.TokenImpersonationLevel" />。 请求的模拟级别。 默认值为 <see cref="F:System.Security.Principal.TokenImpersonationLevel.Delegation" />。</returns>
+      <summary>Gets or sets the impersonation level for the current request.</summary>
+      <returns>Returns <see cref="T:System.Security.Principal.TokenImpersonationLevel" />.The impersonation level for the request. The default is <see cref="F:System.Security.Principal.TokenImpersonationLevel.Delegation" />.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.MaxResponseHeadersLength">
-      <summary>获取或设置响应标题允许的最大长度。</summary>
-      <returns>返回 <see cref="T:System.Int32" />。 响应标题的长度，以 KB（1024 字节）为单位。</returns>
+      <summary>Gets or sets the maximum allowed length of the response headers.</summary>
+      <returns>Returns <see cref="T:System.Int32" />.The length, in kilobytes (1024 bytes), of the response headers.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.ReadWriteTimeout">
-      <summary>获取或设置写入请求或读取服务器中的相应时的超时（以毫秒为单位）。</summary>
-      <returns>返回 <see cref="T:System.Int32" />。 在写入超时或读取超时之前的毫秒数。 默认值为 300,000 毫秒（5 分钟）。</returns>
+      <summary>Gets or sets a time-out in milliseconds when writing a request to or reading a response from a server.</summary>
+      <returns>Returns <see cref="T:System.Int32" />.The number of milliseconds before the writing or reading times out. The default value is 300,000 milliseconds (5 minutes). </returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.ServerCertificateValidationCallback">
-      <summary>获取或设置用于验证服务器证书的回调方法。</summary>
-      <returns>返回 <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" />。用于验证服务器证书的回调方法。</returns>
+      <summary>Gets or sets a callback method to validate the server certificate.</summary>
+      <returns>Returns <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" />.A callback method to validate the server certificate.</returns>
     </member>
     <member name="P:System.Net.Http.WebRequestHandler.UnsafeAuthenticatedConnectionSharing">
-      <summary>获取或设置一个值，该值指示是否允许经过高速 NTLM 身份验证的连接共享。</summary>
-      <returns>返回 <see cref="T:System.Boolean" />。 true 表示使经过身份验证的连接保持打开状态；否则为 false。</returns>
+      <summary>Gets or sets a value that indicates whether to allow high-speed NTLM-authenticated connection sharing.</summary>
+      <returns>Returns <see cref="T:System.Boolean" />.true to keep the authenticated connection open; otherwise, false.</returns>
     </member>
   </members>
 </doc>
