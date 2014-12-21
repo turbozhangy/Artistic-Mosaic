@@ -1,0 +1,6 @@
+F:\Aspose.Imaging\Aspose.Imaging\bin\Debug\Aspose.Imaging.exe
+F:\Aspose.Imaging\Aspose.Imaging\bin\Debug\Aspose.Imaging.pdb
+F:\Aspose.Imaging\Aspose.Imaging\bin\Debug\Aspose.Imaging.dll
+F:\Aspose.Imaging\Aspose.Imaging\obj\Debug\Aspose.Imaging.csprojResolveAssemblyReference.cache
+F:\Aspose.Imaging\Aspose.Imaging\obj\Debug\Aspose.Imaging.exe
+F:\Aspose.Imaging\Aspose.Imaging\obj\Debug\Aspose.Imaging.pdb
