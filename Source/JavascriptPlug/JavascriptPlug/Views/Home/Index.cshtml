@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo</title>
+    <link href="Style/bootstrap.css" rel="stylesheet">
+    <link href="~/Style/am.css" rel="stylesheet" />
+    <style type="text/css">
+        .text-gray {
+            color: #999;
+        }
+
+        .am-rightbar {
+            width: 200px;
+        }
+
+        .w35 {
+            width: 35px;
+        }
+
+        .setting-more {
+            border: 1px dashed #999;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .am-body {
+            padding: 0 30px;
+        }
+
+        .img-warp {
+            min-height: 400px;
+            position: relative;
+        }
+    </style>
+    <script type="text/javascript" src="~/Script/jQuery.js"></script>
+    <script type="text/javascript" src="~/Script/bootstrap.js"></script>
+    <script src="~/Script/am.js"></script>
+    <script type="text/javascript">
+        ////页面load完成后装载插件
+        $(window).load(
+            function () {
+                obj = AM({
+                    collection: document.getElementById("tmpImg").getElementsByTagName("img"),
+                    coverImg: document.getElementById("am_cover_img"),
+                    element: document.getElementById("img_warp")
+                });
+
+
+
+                ////输入框只能输入数字
+                function _inputNumber() {
+                    this.value = this.value.replace(/\D/g, '');
+                    if (this.value > 100) {
+                        this.value = this.value.substring(0, parseInt(this.value.length - 1));
+                    }
+                };
+
+                var sizeW = document.getElementById("am_setting_sizeWInput");
+                sizeW.addEventListener("keyup", _inputNumber);
+                sizeW.addEventListener("afterpaste", _inputNumber);
+                sizeW.value = coverSetting.Size[0];
+
+                var sizeH = document.getElementById("am_setting_sizeHInput");
+                sizeH.addEventListener("keyup", _inputNumber);
+                sizeH.addEventListener("afterpaste", _inputNumber);
+                sizeH.value = coverSetting.Size[1];
+
+                var opacityInput = document.getElementById("am_setting_opacityInput");
+                opacityInput.addEventListener("keyup", _inputNumber);
+                opacityInput.addEventListener("afterpaste", _inputNumber);
+                opacityInput.value = coverSetting.Opacity;
+
+                ////重置按钮
+                document.getElementById("am_reset_SizeBtn").addEventListener("click", function () {
+                    document.getElementById("am_setting_sizeWInput").value = coverSetting.Size[0];
+                    document.getElementById("am_setting_sizeHInput").value = coverSetting.Size[1];
+                });
+
+                document.getElementById("am_reset_OpacityBtn").addEventListener("click", function () {
+                    document.getElementById("am_setting_opacityInput").value = coverSetting.Opacity;
+                });
+
+                ////自动裁剪事件
+                document.getElementById("autoCutting").addEventListener("change", function () {
+                    var outboxWarp = document.getElementById("am_img_outbox");
+                    if (this.checked) {
+                        outboxWarp.style.width = cuttingInBoxSize[0] + "px";
+                        outboxWarp.style.height = cuttingInBoxSize[1] + "px";
+                    } else {
+                        outboxWarp.style.width = "auto";
+                        outboxWarp.style.height = "auto";
+                    }
+                });
+
+                document.getElementById("am_applyBtn").addEventListener("click", function () {
+                    document.getElementById("am_img_inbox").style.opacity = Number(document.getElementById("am_setting_opacityInput").value) / 100;
+                });
+            });
+
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-8 am-body">
+            <h3>图片<small>(从当前页面截取，共<span id="imgCollectionCount">100</span>张)</small></h3>
+            <div class="img-warp" id="img_warp">
+                @*<div class="img-inbox" id="am_img_inbox">
+                    </div>
+                    <div class="img-outbox" id="am_img_outbox">
+                        <img id="am_cover_img" src="/Image/bg.jpg" />
+                    </div>*@
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="am-rightbar">
+                <div class="cover">
+                    <h3>封面<small id="am_cover_size">(1050x900)</small></h3>
+                    <div class="cover-img">
+                        <img src="/Image/1.jpg" class="img-thumbnail" id="am_cover_img" />
+                    </div>
+                    <div>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="autoCutting" value="" checked="checked"> 自动裁剪
+                        </label>
+                        <a href="javascript:void(0)" class="pull-right">本地上传</a>
+                    </div>
+                </div>
+                <div>
+                    <h3>
+                        襄元设置
+                        <div class="pull-right">
+                            <input type="button" value="应用" class="btn btn-warning btn-xs" id="am_applyBtn" />
+                        </div>
+                    </h3>
+                    <div>
+                        尺寸<small class="text-gray">(px)</small>：<input type="text" value="" class="w35" placeholder="宽" id="am_setting_sizeWInput">
+                        <span>X</span>
+                        <input type="text" value="" class="w35" placeholder="高" id="am_setting_sizeHInput">
+                        <input type="button" value="重置" class="btn btn-link btn-xs" id="am_reset_SizeBtn" />
+                    </div>
+                    <div>
+                        透明度<small class="text-gray">(%)</small>：<input type="text" value="" class="w35" id="am_setting_opacityInput" />
+                        <input type="button" value="重置" class="btn btn-link btn-xs" id="am_reset_OpacityBtn" />
+                    </div>
+                    <div class="setting-more text-gray small">
+                        <p>当前图片数量不足以填充封面，请选择弥补操作：</p>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="MakeUpPlan" checked="checked"> 使用襄元尺寸为基准，图片数量不足时自动重复填充。
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="MakeUpPlan"> 使用图片数量为基准，自动计算襄元尺寸。
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input type="button" value="生成图片" class="btn btn-success" />
+                    <input type="button" value="退出" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tmpImg" class="hidden">
+        <img src="/Image/1.jpg" />
+        <img src="/Image/2.jpg" />
+    </div>
+</body>
+</html>

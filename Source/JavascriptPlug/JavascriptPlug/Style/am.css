@@ -1,0 +1,27 @@
+﻿.am-imgContainer, .am-imgCover {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.am-imgContainer {
+    z-index: 5002;
+}
+
+    .am-imgContainer:after, .am-imgContainer:before {
+        clear: both;
+    }
+
+    .am-imgContainer img {
+        float: left;
+    }
+
+.am-imgCover {
+    z-index: 5001;
+    overflow: hidden;
+}
+
+    .am-imgCover img {
+        width: 100%;
+    }
