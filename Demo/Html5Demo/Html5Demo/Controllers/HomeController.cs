@@ -26,5 +26,10 @@ namespace Html5Demo.Controllers
         {
             return View();
         }
+
+        public ActionResult Json()
+        {
+            return View();
+        }
     }
 }

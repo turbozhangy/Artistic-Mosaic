@@ -30,16 +30,16 @@
     <style type="text/css">
         .warp {
             position: relative;
-            width: 12800px;
-            height: 10240px;
+            width: 500px;
+            height: 500px;
         }
 
         .inbox, .outbox {
             position: absolute;
             top: 0;
             left: 0;
-            width: 1280px;
-            height: 1024px;
+            width: 500px;
+            height: 500px;
             overflow: hidden;
         }
 
@@ -48,8 +48,8 @@
         }
 
             .inbox img {
-                width: 100px;
-                height: 100px;
+                width: 50px;
+                height: 50px;
             }
 
         .outbox {
@@ -71,7 +71,7 @@
 
         function Get() {
             html2canvas(document.querySelector(".warp")).then(function (canvas) {
-                var d = canvas.toDataURL("image/jpeg");
+                var d = canvas.toDataURL("image/png");
                 $("#tempImg").attr("src",d);
             },false);
         };

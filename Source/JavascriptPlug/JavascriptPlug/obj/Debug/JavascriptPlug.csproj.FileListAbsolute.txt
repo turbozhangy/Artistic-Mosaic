@@ -23,3 +23,4 @@ F:\Artistic-Mosaic\Source\JavascriptPlug\JavascriptPlug\bin\System.Web.WebPages.
 F:\Artistic-Mosaic\Source\JavascriptPlug\JavascriptPlug\bin\System.Web.WebPages.Razor.xml
 F:\Artistic-Mosaic\Source\JavascriptPlug\JavascriptPlug\obj\Debug\JavascriptPlug.dll
 F:\Artistic-Mosaic\Source\JavascriptPlug\JavascriptPlug\obj\Debug\JavascriptPlug.pdb
+F:\Artistic-Mosaic\Source\JavascriptPlug\JavascriptPlug\obj\Debug\JavascriptPlug.csprojResolveAssemblyReference.cache

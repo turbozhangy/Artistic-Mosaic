@@ -1,12 +1,53 @@
-﻿.am-imgContainer, .am-imgCover {
+﻿.img-body {
     width: 100%;
+    overflow: auto;
+}
+
+.img-Collection {
+    margin: 0;
+    border: 2px dotted #ccc;
+    width: 100%;
+    min-height: 500px;
+}
+
+    .img-Collection li {
+        position: relative;
+        padding: 0;
+        width: 100px;
+        height: 100px;
+    }
+
+    .img-Collection img {
+        width: 100%;
+        height: 100%;
+    }
+
+.am-img-remove {
+    display: none;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background-image: url("/Image/delete.png");
+    background-repeat: no-repeat;
+}
+
+.img-Collection li:hover > .am-img-remove {
+    display: block;
+}
+
+
+
+.img-warp {
+    position: relative;
 }
 
 .am-imgContainer {
-    z-index: 5002;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5000;
 }
 
     .am-imgContainer:after, .am-imgContainer:before {
@@ -18,10 +59,27 @@
     }
 
 .am-imgCover {
+    position: absolute;
+    left: 0;
+    top: 0;
     z-index: 5001;
     overflow: hidden;
+    opacity: 0.45;
 }
 
-    .am-imgCover img {
-        width: 100%;
-    }
+.am-img-main {
+    width: 200px;
+    height:200px;
+}
+
+.am-img-main img{
+    width: 100%;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.ml10 {
+    margin-left: 10px;
+}

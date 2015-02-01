@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace JavascriptPlug.Controllers
 {
@@ -15,13 +16,5 @@ namespace JavascriptPlug.Controllers
         {
             return View();
         }
-
-        public ActionResult Demo()
-        {
-            return View();
-        }
-
-
-
     }
 }
