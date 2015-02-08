@@ -9,62 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Demo</title>
-    <link href="Style/bootstrap.css" rel="stylesheet">
-    <link href="~/Style/am.css" rel="stylesheet" />
-    <style type="text/css">
-        .text-gray {
-            color: #999;
-        }
-
-
-
-        .w35 {
-            width: 35px;
-        }
-
-        .setting-more {
-            border: 1px dashed #999;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
-
-        .am-body {
-            padding: 0 30px;
-            width: 66.66666667%;
-            float: left;
-        }
-
-        .am-rightbar {
-            width: 200px;
-            float: left;
-        }
-    </style>
-    <script type="text/javascript" src="~/Script/jQuery.js"></script>
-    <script type="text/javascript" src="~/Script/bootstrap.js"></script>
-    <script src="~/Script/html2canvas.js"></script>
+    <link href="~/Style/bootstrap.css" rel="stylesheet" />
     <script src="~/Script/am.js"></script>
-    <script type="text/javascript">
-        var am = {};
-        ////页面load完成后装载插件
-        $(window).load(
-            function () {
-                am = new AM("demo");
-                am.init(document.getElementById("tmpImg").getElementsByTagName("img"));
-              //  am.setCover("/Image/1.jpg");
-               // am.setCover("/Image/1.jpg", document.getElementById("tmpImg").getElementsByTagName("img"));
-                
-            });
+    <script src="~/Script/jQuery.js"></script>
 
-    </script>
 </head>
 <body>
     <div id="demo">
-       
-    </div>
-    <div id="tmpImg" class="hidden">
-        <img src="/Image/1.jpg" />
-        <img src="/Image/2.jpg" />
+        正在加载页面
     </div>
 </body>
 </html>
