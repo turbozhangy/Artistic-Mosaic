@@ -150,52 +150,25 @@ AM.prototype.init = function (collection) {
     document.getElementById("am_creatingBtn").onclick = function () {
         this.disabled = true;
         this.value = "处理中...";
-        //html2canvas(document.querySelector("#img_warp")).then(function (canvas) {
-        //    var stream = canvas.toDataURL("image/png");
-        //    document.getElementById("am_creatingBtn").disabled = false;
-        //    document.getElementById("am_creatingBtn").value = "重新生成";
 
-        //    //以下代码为下载此图片功能 
-        //    var downloadBtn = document.getElementById("am_html5download");
-        //    if ('download' in downloadBtn) { //supported  
-        //        downloadBtn.href = stream;
-        //        downloadBtn.download = "artistic-mosaic.png";
-        //        downloadBtn.click();
-        //    }
-        //    else {
-        //        alert("no supported");
-        //    }
-
-        //}, false);
+        var needCut = document.getElementById("autoCutting").checked;
 
         //申明canvas
         var am = AM.instance;
         var canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
         var context = canvas.getContext("2d");
 
         if (am.naturalHeight > 0 && am.naturalWidth > 0) {
-            canvas.width = am.naturalWidth;
-            canvas.height = am.naturalHeight;
-            //var cover = new Image();
-            //cover.src = am.coverImg.src;
-            //// cover.style.opacity = 0.5;
-            //cover.onload = function () {
-            //    context.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight);
-            //    var myImage = context.getImageData(0, 0, this.naturalWidth, this.naturalHeight);
-
-            //    // Loop through data.
-            //    for (var i = 0; i < picLength * 4; i += 4) {
-
-            //        // First bytes are red bytes.        
-            //        // Second bytes are green bytes.
-            //        // Third bytes are blue bytes.
-            //        // Fourth bytes are alpha bytes
-            //        // Test of alpha channel at 50%.
-            //        myImage.data[i + 3] = 128;
-            //    }
-
-            //    context.putImageData(myImage, 0, 0);
-            //}
+            if (needCut) {
+                var fitSize = am.realFitSize();
+                canvas.width = fitSize[0];
+                canvas.height = fitSize[1];
+            }
+            else {
+                canvas.width = am.naturalWidth;
+                canvas.height = am.naturalHeight;
+            }
         }
         else {
             canvas.width = am.imgContainer.clientWidth;
@@ -215,6 +188,7 @@ AM.prototype.init = function (collection) {
             imgTmp.attributes["end"] = false;
             imgTmp.width = 50;
             imgTmp.height = 50;
+            imgTmp.crossOrigin = "anonymous";
             if (i == imgCollection.length - 1) {
                 imgTmp.attributes["end"] = true;
             }
@@ -223,40 +197,38 @@ AM.prototype.init = function (collection) {
 
                 context.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, this.attributes["x"], this.attributes["y"], this.height, this.width);
 
-
+                
                 //最后一个时
                 if (this.attributes["end"] == true) {
                     if (am.coverImg.src) {
+                        //this.realFitSize();
                         var cover = new Image();
                         cover.src = am.coverImg.src;
-                        // cover.style.opacity = 0.5;
+                        cover.crossOrigin = "anonymous";
                         cover.onload = function () {
-                            // context.fillStyle = "rgba(0,0,0,0.5)";
-
-                            // context.fillRect(0, 0, this.naturalWidth, this.naturalHeight);
+                            context.globalAlpha = am.option.setting.opacity / 100;
                             context.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight);
-
+                            
+                            var stream = document.getElementsByTagName("canvas")[0].toDataURL("image/png");
+                            document.getElementById("am_creatingBtn").disabled = false;
+                            document.getElementById("am_creatingBtn").value = "重新生成";
+                            //以下代码为下载此图片功能 
+                            var downloadBtn = document.getElementById("am_html5download");
+                            if ('download' in downloadBtn) { //supported  
+                                downloadBtn.href = stream;
+                                downloadBtn.download = "artistic-mosaic.png";
+                                downloadBtn.click();
+                            }
+                            else {
+                                alert("no supported");
+                            }
                         }
-                    }
-                    // var stream = canvas.toDataURL("image/png");
-
-                    document.getElementById("am_creatingBtn").disabled = false;
-                    document.getElementById("am_creatingBtn").value = "重新生成";
-                    //以下代码为下载此图片功能 
-                    var downloadBtn = document.getElementById("am_html5download");
-                    if ('download' in downloadBtn) { //supported  
-                        downloadBtn.href = stream;
-                        downloadBtn.download = "artistic-mosaic.png";
-                        downloadBtn.click();
-                    }
-                    else {
-                        alert("no supported");
                     }
                 }
             }
         }
 
-        document.body.appendChild(canvas);
+       // document.body.appendChild(canvas);
     };
 
     //var collectionBox = document.getElementById("img_Collection");
