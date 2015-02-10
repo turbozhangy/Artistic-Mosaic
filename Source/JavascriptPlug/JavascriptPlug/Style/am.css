@@ -7750,6 +7750,7 @@ button.close {
 }
 
 .img-warp {
+    min-height:50px;
     position: relative;
 }
 
@@ -7758,6 +7759,8 @@ button.close {
     left: 0;
     top: 0;
     z-index: 5000;
+    min-height:50px;
+ width:100%;
 }
 
     .am-imgContainer > div {

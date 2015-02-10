@@ -32,8 +32,8 @@
 
     html.push("<div class=\"cover\">");
 
-    html.push("<h3>封面<small id=\"am_cover_size\"></small></h3>");
-    html.push("<div class=\"am-img-main img-thumbnail\" id=\"am_mainImg\"></div>");
+    html.push("<h3 style=\"text-align: left;\">封面<small id=\"am_cover_size\"></small></h3>");
+    html.push("<div class=\"am-img-main img-thumbnail\" id=\"am_mainImg\"><div style=\"margin: 80px auto;text-align: center;\">拖动图片到此处完成上传</div></div>");
 
     html.push("<div>");
     html.push("<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"autoCutting\" value=\"\"> 自动裁剪</label>");
@@ -42,29 +42,28 @@
 
     html.push("</div>");
 
-    //html.push("<div>");
+    html.push("<div>");
 
-    //html.push("<h3>襄元设置");
-    //html.push("<div class=\"pull-right\"><input type=\"button\" value=\"应用\" class=\"btn btn-warning btn-xs\" id=\"am_applyBtn\" /></div>");
-    //html.push("</h3>");
+    html.push("<h3>生成设置");
+    // html.push("<div class=\"pull-right\"><input type=\"button\" value=\"应用\" class=\"btn btn-warning btn-xs\" id=\"am_applyBtn\" /></div>");
+    html.push("</h3>");
 
-    //html.push("<div class=\"form-group\">");
-    //html.push("尺寸<small class=\"text-gray\">(px)</small>：<input type=\"text\" value=\"\" class=\"w35\" placeholder=\"宽\" id=\"am_setting_sizeWInput\">");
-    //html.push("<span>X</span>");
-    //html.push("<input type=\"text\" value=\"\" class=\"w35\" placeholder=\"高\" id=\"am_setting_sizeHInput\">");
-    //html.push("<input type=\"button\" value=\"重置\" class=\"btn btn-link btn-xs\" id=\"am_reset_SizeBtn\" />");
-    //html.push("</div>");
+    html.push("<div class=\"form-group\">");
+    html.push("元素尺寸<small class=\"text-gray\">(px)</small>：");
+    html.push("<input type=\"range\" id=\"am_size\" min=\"50\" max=\"200\" step=\"1\" value=\"50\"/>");
+    html.push("</div>");
 
-    //html.push("<div>");
-    //html.push("透明度<small class=\"text-gray\">(%)</small>：<input type=\"text\" value=\"\" class=\"w35\" id=\"am_setting_opacityInput\" />");
-    //html.push("<input type=\"button\" value=\"重置\" class=\"btn btn-link btn-xs\" id=\"am_reset_OpacityBtn\" />");
-    //html.push("</div>");
+    html.push("<div>");
+    html.push("封面透明度<small class=\"text-gray\">(%)</small>");
+    html.push("<input type=\"range\" id=\"am_opacity\" min=\"0\" max=\"100\" step=\"1\" value=\"0\"/>");
 
-    //html.push("</div>");
+    html.push("</div>");
+
+    html.push("</div>");
 
     html.push("<div class=\"mt10 text-right\">");
-    html.push("<input type=\"button\" value=\"退出\" class=\"btn btn-default\" />");
-    html.push("<input type=\"button\" value=\"生成图片\" class=\"btn btn-success ml10\" id=\"am_creatingBtn\"/>");
+    html.push("<input type=\"button\" value=\"退出\" class=\"btn btn-default\" style=\"padding: 6px 20px;width: auto;\"/>");
+    html.push("<input type=\"button\" value=\"生成图片\" class=\"btn btn-success ml10\" id=\"am_creatingBtn\" />");
     html.push("<a id=\"am_html5download\" class=\"hidden\">artistic-mosaic</a>");
     html.push("</div>");
 
@@ -111,7 +110,16 @@
     //    }
     //}, false);
     document.getElementById("autoCutting").checked = this.option.autoCut;
+    document.getElementById("am_opacity").value = this.option.setting.opacity;
+    document.getElementById("am_opacity").addEventListener("change", function () {
+        AM.instance.option.setting.opacity = this.value;
+        document.getElementsByClassName("am-imgCover")[0].style.opacity = this.value / 100;
 
+    }, false);
+    document.getElementById("am_size").value = this.option.setting.size[0];
+    document.getElementById("am_size").addEventListener("change", function () {
+
+    }, false);
     this.element = element;
     this.collection = new Array();
     this.naturalWidth = 0;
@@ -148,14 +156,18 @@ AM.prototype.init = function (collection) {
     };
 
     document.getElementById("am_creatingBtn").onclick = function () {
-        this.disabled = true;
-        this.value = "处理中...";
+        var am = AM.instance;
+        if (am.coverImg.src == "") {
+            alert("请先设置封面图片，您可以直接将图片拖入到图层。");
+            return;
+        }
 
         var needCut = document.getElementById("autoCutting").checked;
 
         //申明canvas
-        var am = AM.instance;
+
         var canvas = document.createElement("canvas");
+        canvas.style.display = "none";
         document.body.appendChild(canvas);
         var context = canvas.getContext("2d");
 
@@ -176,6 +188,12 @@ AM.prototype.init = function (collection) {
         }
 
         var imgCollection = am.imgContainer.getElementsByTagName("img");
+        if (imgCollection.length == 0) {
+            return;
+        }
+
+        this.disabled = true;
+        this.value = "处理中...";
         for (var i = 0; i < imgCollection.length; i++) {
             //AM.instance.imgContainer.getElementsByTagName("img")[1].parentElement.offsetTop
             var x = imgCollection[i].parentElement.offsetLeft;
@@ -197,7 +215,6 @@ AM.prototype.init = function (collection) {
 
                 context.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, this.attributes["x"], this.attributes["y"], this.height, this.width);
 
-                
                 //最后一个时
                 if (this.attributes["end"] == true) {
                     if (am.coverImg.src) {
@@ -208,19 +225,24 @@ AM.prototype.init = function (collection) {
                         cover.onload = function () {
                             context.globalAlpha = am.option.setting.opacity / 100;
                             context.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight);
-                            
-                            var stream = document.getElementsByTagName("canvas")[0].toDataURL("image/png");
-                            document.getElementById("am_creatingBtn").disabled = false;
-                            document.getElementById("am_creatingBtn").value = "重新生成";
-                            //以下代码为下载此图片功能 
-                            var downloadBtn = document.getElementById("am_html5download");
-                            if ('download' in downloadBtn) { //supported  
-                                downloadBtn.href = stream;
-                                downloadBtn.download = "artistic-mosaic.png";
-                                downloadBtn.click();
-                            }
-                            else {
-                                alert("no supported");
+
+                            try {
+                                var stream = document.getElementsByTagName("canvas")[0].toDataURL("image/png");
+                                //以下代码为下载此图片功能 
+                                var downloadBtn = document.getElementById("am_html5download");
+                                if ('download' in downloadBtn) { //supported  
+                                    downloadBtn.href = stream;
+                                    downloadBtn.download = "artistic-mosaic.png";
+                                    downloadBtn.click();
+                                }
+                                else {
+                                    alert("no supported");
+                                }
+                            } catch (e) {
+                                alert("您所访问的网站限制了图片访问，无法生成图片，您可以使用截图工具对合成部分截图。");
+                            } finally {
+                                document.getElementById("am_creatingBtn").disabled = false;
+                                document.getElementById("am_creatingBtn").value = "重新生成";
                             }
                         }
                     }
@@ -228,7 +250,7 @@ AM.prototype.init = function (collection) {
             }
         }
 
-       // document.body.appendChild(canvas);
+        // document.body.appendChild(canvas);
     };
 
     //var collectionBox = document.getElementById("img_Collection");
@@ -247,15 +269,16 @@ AM.prototype.init = function (collection) {
     };
 
     ////拖离 
-    //collectionBox.addEventListener("dragleave", _stop, false);
+    //am.imgContainer.addEventListener("dragleave", _stop, false);
 
     ////拖进 
-    //collectionBox.addEventListener("dragenter", _stop, false);
+    //am.imgContainer.addEventListener("dragenter", _stop, false);
 
     ////拖来拖去 
-    //collectionBox.addEventListener("dragover", _stop, false);
+    //am.imgContainer.addEventListener("dragover", _stop, false);
 
-    //collectionBox.addEventListener("drop", function (e) {
+    //am.imgContainer.addEventListener("drop", function (e) {
+
     //    e.stopPropagation();
     //    e.preventDefault(); //取消默认浏览器拖拽效果 
     //    var fileList = e.dataTransfer.files; //获取文件对象 
@@ -328,6 +351,7 @@ AM.prototype.init = function (collection) {
 
 
 }
+
 AM.prototype.append = function (src) {
     var img = new Image();
     img.src = src;
@@ -400,6 +424,9 @@ AM.prototype.toggleSize = function (isCut) {
 }
 
 AM.prototype.fill = function (width, height, count, container, collection) {
+    if (collection.length == 0) {
+        count = 0;
+    }
     document.getElementById("imgCollectionCount").innerText = count;
     var _index = 0;
     ////将提供的图片按顺序添加
@@ -407,26 +434,27 @@ AM.prototype.fill = function (width, height, count, container, collection) {
         if (_index >= collection.length) {
             _index = 0;
         }
+        if (collection[_index]) {
+            var img = new Image();
+            img.src = collection[_index].src;
+            img.style.width = width + "px";
+            img.style.height = height + "px";
 
-        var img = new Image();
-        img.src = collection[_index].src;
-        img.style.width = width + "px";
-        img.style.height = height + "px";
+            var div = document.createElement("div");
+            div.appendChild(img);
 
-        var div = document.createElement("div");
-        div.appendChild(img);
-
-        var close = document.createElement("a");
-        close.href = "javascript:void(0)";
-        close.title = "删除";
-        close.innerHTML = "X";
-        close.addEventListener("click", function () {
-            var count = Number(document.getElementById("imgCollectionCount").innerText);
-            document.getElementById("imgCollectionCount").innerText = (count - 1);
-            this.parentElement.parentElement.removeChild(this.parentElement);
-        }, false);
-        div.appendChild(close);
-        container.appendChild(div);
-        _index++;
+            var close = document.createElement("a");
+            close.href = "javascript:void(0)";
+            close.title = "删除";
+            close.innerHTML = "X";
+            close.addEventListener("click", function () {
+                var count = Number(document.getElementById("imgCollectionCount").innerText);
+                document.getElementById("imgCollectionCount").innerText = (count - 1);
+                this.parentElement.parentElement.removeChild(this.parentElement);
+            }, false);
+            div.appendChild(close);
+            container.appendChild(div);
+            _index++;
+        }
     }
 }

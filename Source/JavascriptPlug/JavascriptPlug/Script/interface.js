@@ -61,10 +61,10 @@ function init() {
     var oScript = document.createElement("script");
     oScript.type = "text/javascript";
     oScript.onload = function () {
-        var am = new AM("http://localhost:50226", "am_pulg");
+        var am = new AM("http://localhost:9900", "am_pulg");
         am.init(amImgArray);
     };
-    oScript.src = "http://localhost:50226/Script/am.js";
+    oScript.src = "http://localhost:9900/Script/am.js";
 
     document.body.appendChild(oScript);
 
