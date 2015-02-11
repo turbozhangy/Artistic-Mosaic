@@ -18,7 +18,7 @@
     var html = new Array();
     html.push("<link href=\"" + domain + "/Style/am.css\" rel=\"stylesheet\">");
     html.push("<div class=\"am-body\">");
-    html.push("<h3>图片<small>(共使用<span id=\"imgCollectionCount\">0</span>张)</small></h3>");
+    html.push("<h3 style=\"text-align: left;\">图片<small>(共使用<span id=\"imgCollectionCount\">0</span>张)</small></h3>");
     html.push("<div class=\"img-body\">");
     html.push("<div id=\"img_warp\" class=\"img-warp\">");
     html.push("<div class=\"am-imgContainer\"></div>");
@@ -30,12 +30,12 @@
 
     html.push("<div class=\"am-rightbar\">");
 
-    html.push("<div class=\"cover\">");
+    html.push("<div class=\"cover\" name=\"step2\" style=\"display:none\">");
 
     html.push("<h3 style=\"text-align: left;\">封面<small id=\"am_cover_size\"></small></h3>");
     html.push("<div class=\"am-img-main img-thumbnail\" id=\"am_mainImg\"><div style=\"margin: 80px auto;text-align: center;\">拖动图片到此处完成上传</div></div>");
 
-    html.push("<div>");
+    html.push("<div style=\"text-align: left;display:none\" name=\"step2\">");
     html.push("<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"autoCutting\" value=\"\"> 自动裁剪</label>");
     //html.push("<a href=\"javascript:void(0)\" class=\"pull-right\">本地上传</a>");
     html.push("</div>");
@@ -44,30 +44,34 @@
 
     html.push("<div>");
 
-    html.push("<h3>生成设置");
+    html.push("<h3 style=\"text-align: left;\" id=\"am_stepName\">元素");
     // html.push("<div class=\"pull-right\"><input type=\"button\" value=\"应用\" class=\"btn btn-warning btn-xs\" id=\"am_applyBtn\" /></div>");
     html.push("</h3>");
-
-    html.push("<div class=\"form-group\">");
+    html.push("<div name=\"step1\" style=\"border: 2px dotted #ccc;margin-top: 20px;\" id=\"am_dropZone\"><div style=\"margin: 80px auto;text-align: center;\">照片拖动到此处以增加基础元素</div></div>");
+    html.push("<div class=\"form-group mt10\" name=\"step1\">");
     html.push("元素尺寸<small class=\"text-gray\">(px)</small>：");
     html.push("<input type=\"range\" id=\"am_size\" min=\"50\" max=\"200\" step=\"1\" value=\"50\"/>");
     html.push("</div>");
 
-    html.push("<div>");
-    html.push("封面透明度<small class=\"text-gray\">(%)</small>");
+    html.push("<div name=\"step2\" style=\"display:none\">");
+   // html.push("封面透明度<small class=\"text-gray\">(%)</small>");
     html.push("<input type=\"range\" id=\"am_opacity\" min=\"0\" max=\"100\" step=\"1\" value=\"0\"/>");
 
     html.push("</div>");
-
+   
     html.push("</div>");
 
     html.push("<div class=\"mt10 text-right\">");
     html.push("<input type=\"button\" value=\"退出\" class=\"btn btn-default\" style=\"padding: 6px 20px;width: auto;\"/>");
-    html.push("<input type=\"button\" value=\"生成图片\" class=\"btn btn-success ml10\" id=\"am_creatingBtn\" />");
+    html.push("<input type=\"button\" value=\"下一步\" class=\"btn btn-success ml10\" id=\"am_nextStep\" />");
+    html.push("<input type=\"button\" value=\"生成图片\" class=\"btn btn-success ml10\" id=\"am_creatingBtn\"  style=\"display:none;\"/>");
     html.push("<a id=\"am_html5download\" class=\"hidden\">artistic-mosaic</a>");
     html.push("</div>");
 
+    
+
     html.push("</div>");
+
     html.push("<div style=\"clear:both\"></div>");
 
 
@@ -85,6 +89,15 @@
     else {
         document.body.appendChild(element);
     }
+
+    var canvas = document.createElement("canvas");
+    canvas.id = "am_canvas";
+    var tmpDiv = document.createElement("div");
+    tmpDiv.id = "am_getImg";
+    tmpDiv.style.display = "none";
+    tmpDiv.innerHTML = "请在图片上右键另存为。";
+    tmpDiv.appendChild(canvas);
+    document.body.appendChild(tmpDiv);
 
     this.imgContainer = document.getElementsByClassName("am-imgContainer")[0];
     this.coverImg = document.getElementsByClassName("am-imgCover")[0].firstChild;
@@ -109,6 +122,23 @@
     //        am.coverImg.parentElement.style.opacity = "0.45";
     //    }
     //}, false);
+    document.getElementById("am_nextStep").addEventListener("click", function () {
+        var stepOne = document.getElementsByName("step1");
+        for (var i = 0; i < stepOne.length; i++) {
+            stepOne[i].style.display = "none";
+        }
+        var stepTwo = document.getElementsByName("step2");
+        for (var i = 0; i < stepTwo.length; i++) {
+            stepTwo[i].style.display = "block";
+        }
+
+        document.getElementById("am_creatingBtn").style.display = "inline-block";
+
+        this.style.display = "none";
+
+        document.getElementById("am_stepName").innerText = "透明度(%)";
+    }, false);
+
     document.getElementById("autoCutting").checked = this.option.autoCut;
     document.getElementById("am_opacity").value = this.option.setting.opacity;
     document.getElementById("am_opacity").addEventListener("change", function () {
@@ -118,7 +148,18 @@
     }, false);
     document.getElementById("am_size").value = this.option.setting.size[0];
     document.getElementById("am_size").addEventListener("change", function () {
-
+        var size = Number(this.value);
+        var am = AM.instance;
+        am.option.setting.size = [size, size];
+        if (am.coverImg.src) {
+        }
+        else {
+            var imgs = am.imgContainer.getElementsByTagName("img");
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].style.width = size + "px";
+                imgs[i].style.height = size + "px";
+            }
+        }
     }, false);
     this.element = element;
     this.collection = new Array();
@@ -166,9 +207,8 @@ AM.prototype.init = function (collection) {
 
         //申明canvas
 
-        var canvas = document.createElement("canvas");
-        canvas.style.display = "none";
-        document.body.appendChild(canvas);
+        var canvas = document.getElementById("am_canvas");
+
         var context = canvas.getContext("2d");
 
         if (am.naturalHeight > 0 && am.naturalWidth > 0) {
@@ -204,8 +244,8 @@ AM.prototype.init = function (collection) {
             imgTmp.attributes["x"] = x;
             imgTmp.attributes["y"] = y;
             imgTmp.attributes["end"] = false;
-            imgTmp.width = 50;
-            imgTmp.height = 50;
+            imgTmp.width = am.option.setting.size[0];
+            imgTmp.height = am.option.setting.size[1];
             imgTmp.crossOrigin = "anonymous";
             if (i == imgCollection.length - 1) {
                 imgTmp.attributes["end"] = true;
@@ -239,9 +279,10 @@ AM.prototype.init = function (collection) {
                                     alert("no supported");
                                 }
                             } catch (e) {
-                                alert("您所访问的网站限制了图片访问，无法生成图片，您可以使用截图工具对合成部分截图。");
+                                alert("您所访问的网站限制了图片访问，无法自动下载生成的图片，您可以右键另存为。");
+                                document.getElementById("am_getImg").style.display = "block"; 
                             } finally {
-                                document.getElementById("am_creatingBtn").disabled = false;
+                                document.getElementById("am_creatingBtn").disabled = false; 
                                 document.getElementById("am_creatingBtn").value = "重新生成";
                             }
                         }
@@ -268,46 +309,66 @@ AM.prototype.init = function (collection) {
         e.preventDefault();
     };
 
-    ////拖离 
-    //am.imgContainer.addEventListener("dragleave", _stop, false);
+    var dropBox = document.getElementById("am_dropZone");
+    //拖离 
+    dropBox.addEventListener("dragleave", _stop, false);
 
-    ////拖进 
-    //am.imgContainer.addEventListener("dragenter", _stop, false);
+    //拖进 
+    dropBox.addEventListener("dragenter", _stop, false);
 
-    ////拖来拖去 
-    //am.imgContainer.addEventListener("dragover", _stop, false);
+    //拖来拖去 
+    dropBox.addEventListener("dragover", _stop, false);
 
-    //am.imgContainer.addEventListener("drop", function (e) {
+    dropBox.addEventListener("drop", function (e) {
+        e.stopPropagation();
+        e.preventDefault(); //取消默认浏览器拖拽效果 
+        var fileList = e.dataTransfer.files; //获取文件对象 
 
-    //    e.stopPropagation();
-    //    e.preventDefault(); //取消默认浏览器拖拽效果 
-    //    var fileList = e.dataTransfer.files; //获取文件对象 
+        //检测是否是拖拽文件到页面的操作 
+        if (fileList.length == 0) {
+            return false;
+        }
 
-    //    //检测是否是拖拽文件到页面的操作 
-    //    if (fileList.length == 0) {
-    //        return false;
-    //    }
+        //拖拉图片到浏览器，可以实现预览功能 
+        for (var i = 0; i < fileList.length; i++) {
 
-    //    //拖拉图片到浏览器，可以实现预览功能 
-    //    for (var i = 0; i < fileList.length; i++) {
+            // 最大1M
+            if (fileList[i].size < 1024 * 1024) {
+                if (fileList[i].type.indexOf('image') > -1) {
+                    var reader = new FileReader();
 
-    //        // 最大1M
-    //        if (fileList[i].size < 1024 * 1024) {
-    //            if (fileList[i].type.indexOf('image') > -1) {
-    //                var reader = new FileReader();
+                    reader.onload = function (e) {
+                        //AM.instance.append(this.result);
+                        var am = AM.instance;
+                        var img = new Image();
+                        img.src = this.result;
+                        img.style.width = am.option.setting.size[0] + "px";
+                        img.style.height = am.option.setting.size[1] + "px";
 
-    //                reader.onload = function (e) {
-    //                    AM.instance.append(this.result);
-    //                }
+                        var div = document.createElement("div");
+                        div.appendChild(img);
 
-    //                reader.readAsDataURL(fileList[i]);
-    //            }
-    //        }
-    //        else {
-    //            console.log(fileList[i].size);
-    //        }
-    //    }
-    //}, false);
+                        var close = document.createElement("a");
+                        close.href = "javascript:void(0)";
+                        close.title = "删除";
+                        close.innerHTML = "X";
+                        close.addEventListener("click", function () {
+                            var count = Number(document.getElementById("imgCollectionCount").innerText);
+                            document.getElementById("imgCollectionCount").innerText = (count - 1);
+                            this.parentElement.parentElement.removeChild(this.parentElement);
+                        }, false);
+                        div.appendChild(close);
+                        am.imgContainer.appendChild(div);
+
+                        var count = Number(document.getElementById("imgCollectionCount").innerText);
+                        document.getElementById("imgCollectionCount").innerText = count + 1;
+                    }
+
+                    reader.readAsDataURL(fileList[i]);
+                }
+            }
+        }
+    }, false);
 
     var mainImgDiv = document.getElementById("am_mainImg");
 
@@ -352,33 +413,10 @@ AM.prototype.init = function (collection) {
 
 }
 
-AM.prototype.append = function (src) {
-    var img = new Image();
-    img.src = src;
-    img.onload = function (element) {
-        var li = document.createElement("li");
-        var am = AM.instance;
-        if (this.width >= am.option.setting.size[0] && this.height >= am.option.setting.size[1]) {
-            li.appendChild(img);
-            var icon = document.createElement("i");
-            icon.className = "am-img-remove";
-            icon.addEventListener("click", function () {
-                document.getElementById("img_Collection").removeChild(this.parentElement);
-            }, false);
-            li.appendChild(icon);
-            document.getElementById("img_Collection").appendChild(li);
-
-            am.collection.push(img);
-        }
-    }
-}
-
 AM.prototype.setCover = function (imgSrc) {
     if (AM.instance == null) {
         return;
     }
-
-    this.imgContainer.innerHTML = "";
 
     this.coverImg.src = imgSrc;
 
@@ -397,6 +435,18 @@ AM.prototype.setCover = function (imgSrc) {
     ////如果需要裁剪
     //this.toggleSize(this.option.autoCut);
     this.toggleSize(document.getElementById("autoCutting").checked);
+    
+    //var collection = document.getElementsByClassName("am-imgContainer")[0];
+    var collection = this.imgContainer.getElementsByTagName("img");
+    //var newColl = new Array();
+    this.collection = new Array();
+    for (var i = 0; i < collection.length; i++) {
+        var img = new Image();
+        img.src = collection[i].src;
+        this.collection.push(img);
+    };
+
+    this.imgContainer.innerHTML = "";
 
     ////填充画板
     this.fill(this.option.setting.size[0], this.option.setting.size[1], this.count(), this.imgContainer, this.collection);
